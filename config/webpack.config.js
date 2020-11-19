@@ -330,12 +330,12 @@ module.exports = function (webpackEnv) {
           'react-dom$': 'react-dom/profiling',
           'scheduler/tracing': 'scheduler/tracing-profiling',
         }),
-        'react': getAbsPath('src/react-source/react'),
-        'react-dom': getAbsPath('src/react-source/react-dom'),
-        'legacy-events': getAbsPath('src/react-source/legacy-events'),
-        'shared': getAbsPath('src/react-source/shared'),
-        'scheduler': getAbsPath('src/react-source/scheduler'),
-        'react-reconciler': getAbsPath('src/react-source/react-reconciler'),
+        'react': path.resolve(process.cwd(), './src/packages/react'),
+        'react-dom': path.resolve(process.cwd(),'./src/packages/react-dom'),
+        'legacy-events': path.resolve(process.cwd(),'./src/packages/legacy-events'),
+        'shared': path.resolve(process.cwd(),'./src/packages/shared'),
+        'scheduler': path.resolve(process.cwd(),'./src/packages/scheduler'),
+        'react-reconciler': path.resolve(process.cwd(),'./src/packages/react-reconciler'),
         ...(modules.webpackAliases || {}),
       },
       plugins: [
@@ -404,6 +404,7 @@ module.exports = function (webpackEnv) {
                 ),
 
                 plugins: [
+                  [  require.resolve('@babel/plugin-transform-flow-strip-types')],
                   [
                     require.resolve('babel-plugin-named-asset-import'),
                     {
